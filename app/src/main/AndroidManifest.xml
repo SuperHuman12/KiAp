@@ -16,21 +16,24 @@
     <uses-permission android:name="android.hardware.camera.autofocus" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
-    <uses-permission android:name="android.permission.VIBRATE"/>
-    <uses-feature android:name="android.hardware.fingerprint" android:required="true"/>
+    <uses-feature
+        android:name="android.hardware.fingerprint"
+        android:required="true" />
 
-    <uses-permission android:name="android.permission.USE_FINGERPRINT"/>
+    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
+
     <application
-        android:name="com.developer.android.quickveggis.App"
+        android:name=".App"
         android:allowBackup="true"
+        android:hardwareAccelerated="false"
         android:icon="@drawable/icon_launcher"
         android:label="@string/app_name"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme"
         android:largeHeap="true"
-        android:hardwareAccelerated="false">
-        <activity android:name="com.developer.android.quickveggis.ui.activity.SplashActivity">
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".ui.activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -38,167 +41,178 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.developer.android.quickveggis.ui.activity.Walk1Activity"
+            android:name=".ui.activity.Walk1Activity"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.developer.android.quickveggis.ui.activity.LoginActivity"
+            android:name=".ui.activity.LoginActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme" />
         <activity
-            android:name="com.developer.android.quickveggis.ui.activity.TutorialActivity"
+            android:name=".ui.activity.TutorialActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme" />
         <activity
-            android:name="com.developer.android.quickveggis.ui.activity.MainActivity"
+            android:name=".ui.activity.MainActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.developer.android.quickveggis.ui.activity.ProfileActivity"
+            android:name=".ui.activity.ProfileActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme" />
         <activity
-            android:name="com.developer.android.quickveggis.ui.activity.FingerprintActivity"
+            android:name=".ui.activity.FingerprintActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme" />
         <activity
-            android:name="com.developer.android.quickveggis.ui.activity.ConversationActivity"
+            android:name=".ui.activity.ConversationActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme" />
         <activity
-            android:name="com.developer.android.quickveggis.ui.activity.PayoutActivity"
+            android:name=".ui.activity.PayoutActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.developer.android.quickveggis.ui.activity.ProductActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:theme="@style/SplashTheme"
-            android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name="com.developer.android.quickveggis.ui.activity.ProductsActivity"
+            android:name=".ui.activity.ProductActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.developer.android.quickveggis.ui.activity.SurveyActivity"
+            android:name=".ui.activity.ProductsActivity"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.developer.android.quickveggis.ui.activity.TrackingActivity"
+            android:name=".ui.activity.SurveyActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/SplashTheme"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".ui.activity.TrackingActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.developer.android.quickveggis.ui.activity.SurveyVideoActivity"
+            android:name=".ui.activity.SurveyVideoActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.developer.android.quickveggis.ui.activity.UnlockedActivity"
+            android:name=".ui.activity.UnlockedActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.developer.android.quickveggis.ui.activity.CartSelectionActivity"
+            android:name=".ui.activity.CartSelectionActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme" />
         <activity
-            android:name="com.developer.android.quickveggis.ui.activity.OrderActivity"
+            android:name=".ui.activity.OrderActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.developer.android.quickveggis.ui.activity.CheckActivity"
+            android:name=".ui.activity.CheckActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme" />
         <activity
-            android:name="com.developer.android.quickveggis.ui.activity.TaskActivity"
+            android:name=".ui.activity.TaskActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme" />
         <activity
-            android:name="com.developer.android.quickveggis.ui.activity.SearchActivity"
+            android:name=".ui.activity.SearchActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme" />
         <activity
-            android:name="com.developer.android.quickveggis.ui.activity.OfflineRedeemActivity"
+            android:name=".ui.activity.OfflineRedeemActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme" />
         <activity
-            android:name="com.developer.android.quickveggis.ui.activity.CameraActivity"
+            android:name=".ui.activity.CameraActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme" />
         <activity
-            android:name="com.developer.android.quickveggis.ui.activity.SignInActivity"
+            android:name=".ui.activity.SignInActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme" />
         <activity
-            android:name="com.developer.android.quickveggis.ui.activity.SignupActivity"
+            android:name=".ui.activity.SignupActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme" />
         <activity
-            android:name="com.developer.android.quickveggis.ui.activity.CartActivity"
+            android:name=".ui.activity.CartActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme" />
         <activity
-            android:name="com.developer.android.quickveggis.ui.activity.ConfirmActivity"
+            android:name=".ui.activity.ConfirmActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.SemiTransparent" />
         <activity
-            android:name="com.developer.android.quickveggis.ui.activity.NotificationActivity"
+            android:name=".ui.activity.NotificationActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme" />
         <activity
-            android:name="com.developer.android.quickveggis.ui.activity.SupportsActivity"
+            android:name=".ui.activity.SupportsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme" />
         <activity
-            android:name="com.developer.android.quickveggis.ui.activity.GroupCameraActivity"
+            android:name=".ui.activity.GroupCameraActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme" />
         <activity
-            android:name="com.developer.android.quickveggis.ui.activity.OTPSignActivity"
+            android:name=".ui.activity.OTPSignActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/SplashTheme"/>
+            android:theme="@style/SplashTheme" />
 
-        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
-        <activity android:name="com.facebook.FacebookActivity"
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
+        <activity
+            android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:label="@string/app_name" />
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
-        <!--<meta-data android:name="com.onesignal.NotificationOpened.DEFAULT" android:value="DISABLE" />-->
+        <!-- <meta-data android:name="com.onesignal.NotificationOpened.DEFAULT" android:value="DISABLE" /> -->
         <service
-            android:name="com.developer.android.quickveggis.service.NotificationExtenderBareBonesExample"
+            android:name=".service.NotificationExtenderBareBonesExample"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.onesignal.NotificationExtender" />
             </intent-filter>
         </service>
 
-        <meta-data android:name="AA_DB_NAME" android:value="StevenVeggis.db" />
-        <meta-data android:name="AA_DB_VERSION" android:value="1" />
-        <!--For google maps-->
+        <meta-data
+            android:name="AA_DB_NAME"
+            android:value="StevenVeggis.db" />
+        <meta-data
+            android:name="AA_DB_VERSION"
+            android:value="1" />
+        <!-- For google maps -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAgvDOjmuBut4s2bqhgm46TWg2D3izzKdE"/>
+            android:value="AIzaSyAgvDOjmuBut4s2bqhgm46TWg2D3izzKdE" />
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-
         <meta-data
             android:name="AA_MODELS"
             android:value="com.developer.android.quickveggis.model.NotificationModel" />
-
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="2adcac519ed859cb15026aaf281060a4f5e4b3ce" />
+
+        <activity
+            android:name=".ui.activity.HistoryActivity"
+            android:label="@string/title_activity_history"
+            android:theme="@style/Theme.Hotline.SelectedTheme"></activity>
     </application>
 
 </manifest>

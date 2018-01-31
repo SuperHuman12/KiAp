@@ -30,5 +30,9 @@
         android:id="@+id/action_edit"
         android:title="@string/action_edit"
         app:showAsAction="always|collapseActionView" />
+    <item
+        android:id="@+id/action_history"
+        android:title="@string/action_history"
+        app:showAsAction="always|collapseActionView" />
 
 </menu>

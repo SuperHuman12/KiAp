@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:id="@+id/main_layout">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/green_arrow"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+            android:id="@+id/history_arrow_icon"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="1">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Facebook Backup"
+                    android:layout_gravity="start"
+                    android:layout_weight="0.8"
+                    android:textColor="@color/black"
+                    android:id="@+id/history_user_tv"
+                    android:textSize="20dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="$250"
+                    android:layout_gravity="end"
+                    android:layout_weight="0.2"
+                    android:textColor="@color/black"
+                    android:id="@+id/history_price_tv"
+                    android:textSize="20dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="1"
+                android:layout_marginBottom="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Money Received"
+                    android:layout_gravity="start"
+                    android:layout_weight="0.8"
+                    android:textColor="#777777"
+                    android:id="@+id/history_activity_tv"
+                    android:textSize="18dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tue 06"
+                    android:layout_gravity="end"
+                    android:layout_weight="0.2"
+                    android:textColor="#777777"
+                    android:id="@+id/history_date_tv"
+                    android:textSize="18dp"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#EEEEEE"
+        android:textColor="@color/black"
+        android:text="January 2018"
+        android:paddingLeft="10dp"
+        android:id="@+id/date_section"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"/>
+
+</LinearLayout>

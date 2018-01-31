@@ -6,6 +6,8 @@ import android.os.HandlerThread;
 import android.os.Looper;
 import android.util.SparseArray;
 import android.webkit.MimeTypeMap;
+
+import com.developer.android.quickveggis.BuildConfig;
 import com.j256.ormlite.stmt.query.SimpleComparison;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -15,7 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import javax.net.ssl.HttpsURLConnection;
-import xyz.hanks.library.BuildConfig;
+//import xyz.hanks.library.BuildConfig;
 
 public final class YouTubeExtractor {
     public static final int YOUTUBE_VIDEO_QUALITY_HD_1080 = 37;

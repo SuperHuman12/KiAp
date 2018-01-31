@@ -44,7 +44,7 @@
     <string name="date_added">Date added:</string>
     <string name="payment_method">Payment Method:</string>
     <string name="payment_address">Payment Address:</string>
- <string name="receipt_header">"Here your Recept
+    <string name="receipt_header">"Here your Recept
 WE GOT IT!
 As soon as your order is delivered to you, we will rain money into your wallet."</string>
 
@@ -59,10 +59,10 @@ As soon as your order is delivered to you, we will rain money into your wallet."
     <string name="stop">Stop</string>
     <string name="start">Start</string>
     <string name="btnGetStarted">Get Started</string>
-<string name="you_earned">"With QuickVeggies,
+    <string name="you_earned">"With kikbac,
 You earned"</string>
-    <string name="select_gift">Please select a gift card</string>
-    <string name="cash_out">Submit your requests, cash out (100$ minimum)</string>
+    <string name="select_gift">Redeem as Giftcard</string>
+    <string name="cash_out">Submit your requests, cash out (Minimum 100 ₹)</string>
     <string name="multiple_options">Multiple options</string>
     <string name="login_facebook">Log in with facebook</string>
     <string name="login_bottom_text">View our Privacy Policy and Terms of Use</string>
@@ -214,7 +214,7 @@ You earned"</string>
     <string name="alert_with_vibrate">Alert with vibrate</string>
     <string name="alert_with_light">Alert with light</string>
     <string name="bank_account">Bank Account %d</string>
- <string name="bank_item" formatted="false">"Name:%s,
+    <string name="bank_item" formatted="false">"Name:%s,
 Bank:%s,
 Zip:%s,
 Contact:%s"</string>
@@ -310,6 +310,7 @@ Contact:%s"</string>
     <string name="long_receipt_hint">Long receipt?\nAdd more sections</string>
     <string name="add_from_favorites">Add from Favorites</string>
     <string name="action_edit">EDIT</string>
+    <string name="action_history">History</string>
     <string name="action_done">DONE</string>
     <string name="back_to_top">Back to Top</string>
     <string name="showing_a_selection">Showing a selection of sponsored content and\nrecommendations for you.</string>
@@ -387,5 +388,11 @@ Contact:%s"</string>
     <integer name="main_menu_open_anim_1st_step_duration">200</integer>
     <integer name="main_menu_open_anim_2nd_step_duration">80</integer>
     <integer name="main_menu_close_anim_step_duration">200</integer>
-    
+    <string name="title_activity_history">HistoryActivity</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="tab_text_3">Tab 3</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
 </resources>

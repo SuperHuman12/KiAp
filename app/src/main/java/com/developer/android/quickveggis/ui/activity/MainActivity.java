@@ -62,6 +62,7 @@ import static com.developer.android.quickveggis.ui.fragments.TouchIDFragment.FIN
 import static com.developer.android.quickveggis.ui.fragments.TouchIDFragment.FINGERPRINT_INIT_STATE;
 
 public class MainActivity extends AppCompatActivity {
+    public static final int MENU_HISTORY_VISIBLE=7;
     public static final int MENU_LOGO_GONE=6;
     public static final int MENU_ARROW_VISIBLE=5;
     public static final int MENU_EDIT_VISIBLE = 4;
@@ -251,6 +252,7 @@ public class MainActivity extends AppCompatActivity {
                 menu.findItem(R.id.action_notifications).setVisible(true);
                 menu.findItem(R.id.action_share).setVisible(false);
                 menu.findItem(R.id.action_edit).setVisible(false);
+                menu.findItem(R.id.action_history).setVisible(false);
                 toolbar_logo.setVisibility(View.VISIBLE);
                 break;
             case MENU_LOGO_GONE: /*6*/
@@ -259,6 +261,7 @@ public class MainActivity extends AppCompatActivity {
                 menu.findItem(R.id.action_notifications).setVisible(true);
                 menu.findItem(R.id.action_share).setVisible(false);
                 menu.findItem(R.id.action_edit).setVisible(false);
+                menu.findItem(R.id.action_history).setVisible(false);
                 toolbar_logo.setVisibility(View.GONE);
                 break;
             case MENU_NOT_VISIBLE /*1*/:
@@ -267,6 +270,7 @@ public class MainActivity extends AppCompatActivity {
                 menu.findItem(R.id.action_notifications).setVisible(false);
                 menu.findItem(R.id.action_share).setVisible(false);
                 menu.findItem(R.id.action_edit).setVisible(false);
+                menu.findItem(R.id.action_history).setVisible(false);
                 toolbar_logo.setVisibility(View.GONE);
                 break;
             case MENU_CART_VISIBLE /*2*/:
@@ -275,6 +279,7 @@ public class MainActivity extends AppCompatActivity {
                 menu.findItem(R.id.action_notifications).setVisible(false);
                 menu.findItem(R.id.action_share).setVisible(false);
                 menu.findItem(R.id.action_edit).setVisible(false);
+                menu.findItem(R.id.action_history).setVisible(false);
                 toolbar_logo.setVisibility(View.GONE);
                 break;
             case MENU_PRODUCT_VISIBLE:/*3*/
@@ -283,6 +288,7 @@ public class MainActivity extends AppCompatActivity {
                 menu.findItem(R.id.action_notifications).setVisible(false);
                 menu.findItem(R.id.action_share).setVisible(true);
                 menu.findItem(R.id.action_edit).setVisible(false);
+                menu.findItem(R.id.action_history).setVisible(false);
                 toolbar_logo.setVisibility(View.GONE);
                 break;
             case MENU_EDIT_VISIBLE:/*4*/
@@ -291,6 +297,7 @@ public class MainActivity extends AppCompatActivity {
                 menu.findItem(R.id.action_notifications).setVisible(false);
                 menu.findItem(R.id.action_share).setVisible(false);
                 menu.findItem(R.id.action_edit).setVisible(true);
+                menu.findItem(R.id.action_history).setVisible(false);
                 toolbar_logo.setVisibility(View.GONE);
                 break;
             case MENU_ARROW_VISIBLE:/*5*/
@@ -299,6 +306,16 @@ public class MainActivity extends AppCompatActivity {
                 menu.findItem(R.id.action_notifications).setVisible(false);
                 menu.findItem(R.id.action_share).setVisible(false);
                 menu.findItem(R.id.action_edit).setVisible(false);
+                menu.findItem(R.id.action_history).setVisible(false);
+                toolbar_logo.setVisibility(View.GONE);
+                break;
+            case MENU_HISTORY_VISIBLE:/*5*/
+                menu.findItem(R.id.action_map).setVisible(false);
+                menu.findItem(R.id.action_cart).setVisible(false);
+                menu.findItem(R.id.action_notifications).setVisible(false);
+                menu.findItem(R.id.action_share).setVisible(false);
+                menu.findItem(R.id.action_edit).setVisible(false);
+                menu.findItem(R.id.action_history).setVisible(true);
                 toolbar_logo.setVisibility(View.GONE);
                 break;
         }
@@ -414,6 +431,9 @@ public class MainActivity extends AppCompatActivity {
                     CartFragment.editShopList(false);
                     item.setTitle(getResources().getString(R.string.action_edit));
                 }
+                break;
+            case  R.id.action_history:
+                startActivity(HistoryActivity.getStartIntent(this));
                 break;
         }
 
