@@ -53,7 +53,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingBottom="15dp"
-                android:paddingTop="0dp" >
+                android:paddingTop="0dp">
 
                 <RadioButton
                     android:id="@+id/first"
@@ -104,10 +104,10 @@
                     android:layout_height="wrap_content"
                     android:drawableRight="@drawable/ic_search_grey_600_24dp"
                     android:hint="@string/filter_brands_hint"
-                    android:paddingLeft="10dp"
                     android:paddingBottom="15dp"
-                    android:textSize="14sp"
-                    android:singleLine="true"/>
+                    android:paddingLeft="10dp"
+                    android:singleLine="true"
+                    android:textSize="14sp" />
 
                 <FrameLayout
                     android:layout_width="match_parent"
@@ -150,9 +150,5 @@
         </LinearLayout>
 
     </ScrollView>
-
-
-
-
 
 </LinearLayout>

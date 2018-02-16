@@ -2,6 +2,7 @@ package com.developer.android.quickveggis.ui.fragments;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -9,6 +10,8 @@ import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Shader;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Message;
@@ -42,6 +45,7 @@ import com.developer.android.quickveggis.model.ProfileMenu;
 import com.developer.android.quickveggis.model.event.Logout;
 import com.developer.android.quickveggis.ui.activity.LoginActivity;
 import com.developer.android.quickveggis.ui.activity.ProfileActivity;
+import com.developer.android.quickveggis.ui.activity.select_sources;
 import com.developer.android.quickveggis.ui.utils.FragmentUtils;
 import com.developer.android.quickveggis.ui.utils.RecyclerItemClickListener;
 import com.facebook.login.widget.ProfilePictureView;
@@ -64,6 +68,10 @@ public class ProfileFragment extends Fragment {
     private static final int MENU_SETTINGS = 2;
     private static final int MENU_UPDATE_PROFILE = 1;
     private static final int MENU_LOGOUT = 4;
+    private static final int MENU_DATASOURSE = 5;
+    private static final int MENU_SHAREWDFRIENDS = 6;
+    private static final int MENU_FEEDBACK = 7;
+    private static final int MENU_HELP = 8;
     TextView txtFirstCharacterOfName;
     MenuAdapter adapter;
     List<ProfileMenu> data;
@@ -155,14 +163,23 @@ public class ProfileFragment extends Fragment {
         txtFirstCharacterOfName.setText(String.valueOf(upperFirstname.charAt(0)));
 
         final TextView txtLifetime = (TextView)view.findViewById(R.id.text_lifetime);
-        txtLifetime.setText("0र Lifetime Earnings");
+        //txtLifetime.setText("र 892.55 Lifetime Earnings");
+        txtLifetime.setText("₹ 892.55");
 
-        ServiceAPI.newInstance().getCustomerEarningValues(customer.getCustomerId(), new ResponseCallback<EarningValue>() { //
+        if(isNetworkAvailable()){
+            String walletAmount = CustomerController.getInstance().getLoggedInCustomer().getWallet().getWalletTotal();
+            if(walletAmount != null){
+                txtLifetime.setText("₹ " +walletAmount);
+            }
+        }
+
+
+       /* ServiceAPI.newInstance().getCustomerEarningValues(customer.getCustomerId(), new ResponseCallback<EarningValue>() { //
             @Override
             public void onSuccess(EarningValue data) {
 
                 if (data.getLifetime() != null) {
-                    txtLifetime.setText(data.getLifetime() + "र Lifetime Earnings");
+                    txtLifetime.setText(data.getLifetime() + "र ");
                 }
             }
 
@@ -170,7 +187,7 @@ public class ProfileFragment extends Fragment {
             public void onFailure(String error) {
 
             }
-        });
+        });*/
 
         ButterKnife.bind(this, view);
         return view;
@@ -250,8 +267,12 @@ public class ProfileFragment extends Fragment {
     private void fillMenu() {
         data.clear();
         data.add(new ProfileMenu(R.string.update_profile, MENU_UPDATE_PROFILE));
+        data.add(new ProfileMenu(R.string.connection_data_source, MENU_DATASOURSE));
         data.add(new ProfileMenu(R.string.settings, MENU_SETTINGS));
         data.add(new ProfileMenu(R.string.about, MENU_ABOUT));
+        data.add(new ProfileMenu(R.string.share_wd_friends, MENU_SHAREWDFRIENDS));
+        data.add(new ProfileMenu(R.string.leave_feedback, MENU_FEEDBACK));
+        data.add(new ProfileMenu(R.string.help_support, MENU_HELP));
         data.add(new ProfileMenu(R.string.log_out, MENU_LOGOUT));
     }
 
@@ -269,6 +290,17 @@ public class ProfileFragment extends Fragment {
             case MENU_LOGOUT:
                 logout();
                 break;
+            case MENU_DATASOURSE:
+                Intent i = new Intent(getActivity(), select_sources.class);
+                startActivity(i);
+                break;
+            case MENU_SHAREWDFRIENDS:
+                break;
+            case MENU_FEEDBACK:
+                break;
+            case MENU_HELP:
+                break;
+
         }
     }
 
@@ -354,4 +386,13 @@ public class ProfileFragment extends Fragment {
         super.onResume();
         ((ProfileActivity)getActivity()).btnSave.setVisibility(View.GONE);
     }
+
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
 }

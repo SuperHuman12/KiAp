@@ -308,7 +308,7 @@ public class CategoriesFragment extends Fragment implements MainActivity.MenuCon
         }
 
         // Search
-        searchLayout.setOnClickListener(new View.OnClickListener() {
+        searchLayout.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
 

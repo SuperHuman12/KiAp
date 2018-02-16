@@ -1,17 +1,30 @@
 package com.developer.android.quickveggis.ui.fragments;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.TranslateAnimation;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.developer.android.quickveggis.R;
@@ -23,6 +36,7 @@ import com.developer.android.quickveggis.model.Category;
 import com.developer.android.quickveggis.model.Product;
 import com.developer.android.quickveggis.ui.activity.MainActivity;
 import com.developer.android.quickveggis.ui.activity.ProductsActivity;
+import com.developer.android.quickveggis.ui.activity.SearchActivity;
 import com.developer.android.quickveggis.ui.adapter.ProductAdapter;
 import com.developer.android.quickveggis.ui.utils.PreferenceUtil;
 import com.developer.android.quickveggis.ui.utils.RecyclerItemClickListener;
@@ -31,6 +45,9 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -40,6 +57,7 @@ import static com.developer.android.quickveggis.ui.utils.FadeAnim.startFadeInAni
 
 public class ProductsFragment extends Fragment {
     ProductAdapter adapter;
+    ArrayList<Product> dataSearch;
     ArrayList<Product> products;
     ArrayList<Product> productsFiltered;
     ArrayList<CartItem> cartItems;
@@ -57,11 +75,29 @@ public class ProductsFragment extends Fragment {
     RelativeLayout noProudctsLayout;
     @Bind(R.id.tutorialLayout)
     RelativeLayout tutorialLayout;
+    @Bind(R.id.filter_custom_lay)
+    LinearLayout filter_custom_lay;
+    @Bind(R.id.edtText_search)
+    EditText edtText_search;
+    @Bind(R.id.search_iv)
+    ImageView search_iv;
+    @Bind(R.id.cross_icon)
+    ImageView cross_icon;
 
+    LinearLayout filter_parent;
+    TextView categoryText;
+    LinearLayout filters_layout_child;
+    Animation animShow,animHide;
+    TextView close_tv;
+    LinearLayout filters_layout;
+    Map<String, Boolean> selected;
+    List<String> brands;
     Category category;
+    FrameLayout content_lay;
+
     /* renamed from: com.quickveggies.quickveggies.ui.fragment.ProductsFragment.1 */
-    class C05681 implements RecyclerItemClickListener.OnItemClickListener {
-        C05681() {
+    class C05681 implements RecyclerItemClickListener.OnItemClickListener{
+        C05681(){
         }
 
         public void onItemClick(View view, int position) {
@@ -96,16 +132,70 @@ public class ProductsFragment extends Fragment {
         return view;
     }
 
+    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        tutorialLayout.setOnClickListener(new View.OnClickListener() {
+
+        this.selected = new HashMap();
+        this.brands = new ArrayList();
+        filters_layout_child = (LinearLayout) getActivity().findViewById(R.id.filters_layout_child);
+        filters_layout = (LinearLayout) getActivity().findViewById(R.id.filters_layout);
+        categoryText = (TextView) getActivity().findViewById(R.id.categoryText);
+        filter_parent = (LinearLayout) getActivity().findViewById(R.id.filter_parent);
+
+
+        animShow = AnimationUtils.loadAnimation(getContext(), R.anim.view_show);
+        animHide = AnimationUtils.loadAnimation( getContext(), R.anim.view_hide);
+
+        tutorialLayout.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View v) {
+            public void onClick(View v){
                 v.setVisibility(View.GONE);
             }
         });
 
+
+
+        if(!categoryText.getText().toString().equals("Favourites")){
+            filter_parent.setVisibility(View.VISIBLE);
+        }else{
+            filter_parent.setVisibility(View.GONE);
+        }
+        search_iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                performSearch();
+            }
+        });
+
+        filter_custom_lay.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+
+
+                View view = getActivity().getCurrentFocus();
+                if (view != null) {
+                    InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                }
+
+                content_lay.setVisibility(View.GONE);
+                filters_layout.setVisibility(View.VISIBLE);
+                filters_layout_child.setVisibility(View.VISIBLE);
+                filters_layout_child.startAnimation(animShow);
+            }
+        });
+
+        cross_icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                edtText_search.setText("");
+            }
+        });
+
+
+        content_lay = (FrameLayout) getActivity().findViewById(R.id.content);
         products = new ArrayList();
         productsFiltered = new ArrayList<>();
         cartItems = new ArrayList<>();
@@ -197,9 +287,94 @@ public class ProductsFragment extends Fragment {
             }
         });
 
-
-
     }
+
+
+    public void performSearch(){
+        String item1 = "";
+        String item2 = "";
+        item2 = edtText_search.getText().toString();
+        String item3 = "";
+        filter(item1, item2, item3);
+    }
+
+
+    private void filter(String item1, String item2, String item3){
+
+        // New:  dateAdded = "2016-05-20 12:05:43"
+        // Popularity:  popularity="8.00", viewed="53", rating=0, reviews.reviewTotal="0", reward=null
+        // Ending soon: dateAvailable= "2016-05-20 12:05:43";
+        // SavingHighToLow: TotalTaskAmount="8.00"
+
+        for (int i = 0; i < brands.size(); i ++) {
+            String item = (String) this.brands.get(i);
+            boolean isSelected = ((Boolean) this.selected.get(item)).booleanValue();
+            if (isSelected) {
+                item3 = item3 + " ," + brands.get(i);
+            }
+        }
+
+        ((ProductsFragment) this).doFilte(item1,item2, item3);
+    }
+
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if(getView() == null){
+            return;
+        }
+
+        getView().setFocusableInTouchMode(true);
+        getView().requestFocus();
+        getView().setOnKeyListener(new View.OnKeyListener(){
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event){
+
+                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK){
+
+                    if(filters_layout.getVisibility() == View.VISIBLE){
+                        content_lay.setVisibility(View.VISIBLE);
+                        filters_layout_child.startAnimation(animHide);
+                        filters_layout.setVisibility(View.GONE);
+                        filters_layout_child.setVisibility(View.GONE);
+                    }else{
+                        getActivity().finish();
+                    }
+                    return true;
+                }
+                return false;
+            }
+        });
+    }
+
+
+    public void slideUp(View view){
+        view.setVisibility(View.VISIBLE);
+        TranslateAnimation animate = new TranslateAnimation(
+                0,                 // fromXDelta
+                0,                 // toXDelta
+                view.getHeight(),  // fromYDelta
+                0);                // toYDelta
+        animate.setDuration(500);
+        animate.setFillAfter(true);
+        view.startAnimation(animate);
+    }
+
+    // slide the view from its current position to below itself
+    public void slideDown(View view){
+        TranslateAnimation animate = new TranslateAnimation(
+                0,                 // fromXDelta
+                0,                 // toXDelta
+                0,                 // fromYDelta
+                view.getHeight()); // toYDelta
+        animate.setDuration(500);
+        animate.setFillAfter(true);
+        view.startAnimation(animate);
+    }
+
 
     public void doFilte(String item1, String item2, String item3) {
 

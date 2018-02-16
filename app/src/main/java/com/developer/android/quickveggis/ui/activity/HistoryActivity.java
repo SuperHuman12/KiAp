@@ -73,7 +73,6 @@ public class HistoryActivity extends AppCompatActivity implements android.suppor
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
         actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
-
         setTitle("History");
 
         // When swiping between different sections, select the corresponding

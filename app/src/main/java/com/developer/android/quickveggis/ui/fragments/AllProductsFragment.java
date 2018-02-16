@@ -1,17 +1,31 @@
 package com.developer.android.quickveggis.ui.fragments;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.TranslateAnimation;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -28,6 +42,7 @@ import com.developer.android.quickveggis.model.Category;
 import com.developer.android.quickveggis.model.Product;
 import com.developer.android.quickveggis.ui.activity.MainActivity;
 import com.developer.android.quickveggis.ui.activity.ProductsActivity;
+import com.developer.android.quickveggis.ui.activity.SearchActivity;
 import com.developer.android.quickveggis.ui.adapter.ProductAdapter;
 import com.developer.android.quickveggis.ui.utils.ConvertDpPx;
 import com.developer.android.quickveggis.ui.utils.PreferenceUtil;
@@ -37,6 +52,9 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -46,6 +64,7 @@ import static com.developer.android.quickveggis.ui.utils.FadeAnim.startFadeInAni
 public class AllProductsFragment extends Fragment {
     ArrayList<Product> products;
     ArrayList<Product> productsFiltered;
+    ArrayList<Product> dataSearch;
     @Bind(R.id.backToTop)
     RelativeLayout backToTop;
     @Bind(R.id.scrollView)
@@ -60,8 +79,25 @@ public class AllProductsFragment extends Fragment {
     LinearLayout mainLayout;
     @Bind(R.id.tutorialLayout)
     RelativeLayout tutorialLayout;
+    @Bind(R.id.filter_custom_lay)
+    LinearLayout filter_custom_lay;
+    @Bind(R.id.edtText_search)
+    EditText edtText_search;
+    @Bind(R.id.search_iv)
+    ImageView search_iv;
+    @Bind(R.id.cross_icon)
+    ImageView cross_icon;
 
+    LinearLayout filter_parent;
+    LinearLayout filters_layout_child;
+    Animation animShow,animHide;
+    Map<String, Boolean> selected;
+    List<String> brands;
     Category category;
+    LinearLayout filters_layout;
+    TextView categoryText;
+    FrameLayout content_lay;
+
 
     ArrayList<RecyclerView> rvList = new ArrayList<>();
     ArrayList<ProductAdapter> adapterList = new ArrayList<>();
@@ -90,6 +126,7 @@ public class AllProductsFragment extends Fragment {
     public AllProductsFragment() {
         this.products = new ArrayList();
         this.productsFiltered = new ArrayList<>();
+        this.dataSearch = new ArrayList();
     }
 
     public static AllProductsFragment newInstance(Category category) {
@@ -107,17 +144,68 @@ public class AllProductsFragment extends Fragment {
         return view;
     }
 
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+    public void onActivityCreated(@Nullable Bundle savedInstanceState){
         super.onActivityCreated(savedInstanceState);
         products = new ArrayList();
         productsFiltered = new ArrayList<>();
+        filters_layout = (LinearLayout) getActivity().findViewById(R.id.filters_layout);
+        filters_layout_child = (LinearLayout) getActivity().findViewById(R.id.filters_layout_child);
+        content_lay = (FrameLayout) getActivity().findViewById(R.id.content);
 
-        tutorialLayout.setOnClickListener(new View.OnClickListener() {
+
+       // close_tv = (TextView) getActivity().findViewById(R.id.close_tv);
+
+        categoryText = (TextView) getActivity().findViewById(R.id.categoryText);
+        filter_parent = (LinearLayout) getActivity().findViewById(R.id.filter_parent);
+        animShow = AnimationUtils.loadAnimation(getContext(), R.anim.view_show);
+        animHide = AnimationUtils.loadAnimation( getContext(), R.anim.view_hide);
+        this.selected = new HashMap();
+        this.brands = new ArrayList();
+        dataSearch.clear();
+        if(!categoryText.getText().toString().equals("Favourites")){
+            filter_parent.setVisibility(View.VISIBLE);
+        }else{
+            filter_parent.setVisibility(View.GONE);
+        }
+
+        tutorialLayout.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 v.setVisibility(View.GONE);
             }
         });
+
+        cross_icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                edtText_search.setText("");
+            }
+        });
+
+        search_iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                performSearch();
+            }
+        });
+
+        filter_custom_lay.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+
+                View view = getActivity().getCurrentFocus();
+                if (view != null) {
+                    InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                }
+
+                content_lay.setVisibility(View.GONE);
+                filters_layout.setVisibility(View.VISIBLE);
+                filters_layout_child.setVisibility(View.VISIBLE);
+                filters_layout_child.startAnimation(animShow);
+            }
+        });
+
 
         mainLayout.removeAllViews();
 
@@ -217,7 +305,82 @@ public class AllProductsFragment extends Fragment {
                 }
             }
         });
+
+
+
+        edtText_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    performSearch();
+                    return true;
+                }
+                return false;
+            }
+        });
+
+
     }
+
+    public void performSearch(){
+        String item1 = "";
+        String item2 = "";
+        item2 = edtText_search.getText().toString();
+        String item3 = "";
+
+        filter(item1, item2, item3);
+    }
+
+
+    private void filter(String item1, String item2, String item3) {
+
+        // New:  dateAdded = "2016-05-20 12:05:43"
+        // Popularity:  popularity="8.00", viewed="53", rating=0, reviews.reviewTotal="0", reward=null
+        // Ending soon: dateAvailable= "2016-05-20 12:05:43";
+        // SavingHighToLow: TotalTaskAmount="8.00"
+
+        for (int i = 0; i < brands.size(); i ++) {
+            String item = (String) this.brands.get( i );
+            boolean isSelected = ((Boolean) this.selected.get(item)).booleanValue();
+            if (isSelected) {
+                item3 = item3 + " ," + brands.get(i);
+            }
+        }
+        ((AllProductsFragment) this).doFilte(item1, "", item3);
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if(getView() == null){
+            return;
+        }
+
+        getView().setFocusableInTouchMode(true);
+        getView().requestFocus();
+        getView().setOnKeyListener(new View.OnKeyListener(){
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event){
+
+                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK){
+                    if(filters_layout.getVisibility() == View.VISIBLE){
+
+                        content_lay.setVisibility(View.VISIBLE);
+                        filters_layout_child.startAnimation(animHide);
+                        filters_layout.setVisibility(View.GONE);
+                        filters_layout_child.setVisibility(View.GONE);
+                    }else{
+                        getActivity().finish();
+                    }
+                    return true;
+                }
+                return false;
+            }
+        });
+    }
+
 
     public void dataSetChanged() {
 

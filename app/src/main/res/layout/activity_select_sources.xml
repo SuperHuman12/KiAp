@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.developer.android.quickveggis.ui.activity.select_sources">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@color/mainGreen"
+                android:layout_weight="0.3">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/illus"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.7"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_height="70dp"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:paddingLeft="20dp"
+                        android:paddingTop="10dp"
+                        android:layout_weight="0.5"
+                        android:src="@drawable/placeholder"/>
+
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:paddingLeft="10dp"
+                        android:layout_weight="2">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:layout_gravity="center_vertical"
+                            android:textSize="19dp"
+                            android:text="Location"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:textSize="19dp"
+                            android:textColor="@color/dim_foreground_disabled_material_light"
+                            android:text="logs your routes"/>
+                    </LinearLayout>
+                    <Switch
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:scaleX="1.2"
+                        android:scaleY="1.2"
+                        android:paddingRight="10dp"
+                        android:layout_gravity="center_horizontal|center_vertical"
+                        android:layout_weight="0.5"/>
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/button_material_light"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:layout_height="70dp"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:paddingLeft="20dp"
+                        android:paddingTop="10dp"
+                        android:layout_weight="0.5"
+                        android:src="@drawable/linkedin"/>
+
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:paddingLeft="10dp"
+                        android:layout_weight="2">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:layout_gravity="center_vertical"
+                            android:textSize="19dp"
+                            android:text="LinkedIn"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:textSize="19dp"
+                            android:textColor="@color/dim_foreground_disabled_material_light"
+                            android:text="saves your connection"/>
+                    </LinearLayout>
+                    <Switch
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="10dp"
+                        android:scaleX="1.2"
+                        android:scaleY="1.2"
+                        android:layout_gravity="center_horizontal|center_vertical"
+                        android:layout_weight="0.5"/>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/button_material_light"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:layout_height="70dp"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:paddingLeft="20dp"
+                        android:paddingTop="10dp"
+                        android:layout_weight="0.5"
+                        android:src="@drawable/facebook"/>
+
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:paddingLeft="10dp"
+                        android:layout_weight="2">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:layout_gravity="center_vertical"
+                            android:textSize="19dp"
+                            android:text="Facebook"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:textSize="19dp"
+                            android:textColor="@color/dim_foreground_disabled_material_light"
+                            android:text="saves your likes and more"/>
+                    </LinearLayout>
+                    <Switch
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="10dp"
+                        android:scaleX="1.2"
+                        android:scaleY="1.2"
+                        android:layout_gravity="center_horizontal|center_vertical"
+                        android:layout_weight="0.5"/>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/button_material_light"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:layout_height="70dp"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:paddingLeft="20dp"
+                        android:paddingTop="10dp"
+                        android:layout_weight="0.5"
+                        android:src="@drawable/twitter"/>
+
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:paddingLeft="10dp"
+                        android:layout_weight="2">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:layout_gravity="center_vertical"
+                            android:textSize="19dp"
+                            android:text="Twitter"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:textSize="19dp"
+                            android:textColor="@color/dim_foreground_disabled_material_light"
+                            android:text="Your tweets and likes"/>
+                    </LinearLayout>
+                    <Switch
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="10dp"
+                        android:scaleX="1.2"
+                        android:scaleY="1.2"
+                        android:layout_gravity="center_horizontal|center_vertical"
+                        android:layout_weight="0.5"/>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/button_material_light"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:layout_height="70dp"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:paddingLeft="20dp"
+                        android:paddingTop="10dp"
+                        android:layout_weight="0.5"
+                        android:src="@drawable/like"/>
+
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:paddingLeft="10dp"
+                        android:layout_weight="2">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:layout_gravity="center_vertical"
+                            android:textSize="19dp"
+                            android:text="Health Kit"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:textSize="19dp"
+                            android:textColor="@color/dim_foreground_disabled_material_light"
+                            android:text="Your health tips"/>
+                    </LinearLayout>
+                    <Switch
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="10dp"
+                        android:scaleX="1.2"
+                        android:scaleY="1.2"
+                        android:layout_gravity="center_horizontal|center_vertical"
+                        android:layout_weight="0.5"/>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/button_material_light"/>
+
+            </LinearLayout>
+        </LinearLayout>
+</LinearLayout>

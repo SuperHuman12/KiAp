@@ -212,7 +212,9 @@
         <activity
             android:name=".ui.activity.HistoryActivity"
             android:label="@string/title_activity_history"
-            android:theme="@style/Theme.Hotline.SelectedTheme"></activity>
+            android:theme="@style/Theme.Hotline.SelectedTheme" />
+        <activity android:name=".ui.activity.select_sources"
+            android:theme="@style/Theme.Hotline.SelectedTheme">
+        </activity>
     </application>
-
 </manifest>

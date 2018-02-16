@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.developer.android.quickveggis.App;
@@ -47,6 +49,7 @@ public class CartActivity extends AppCompatActivity implements MainActivity.Menu
         onBackPressed();
         return true;
     }
+
 
     @Override
     protected void onResume() {

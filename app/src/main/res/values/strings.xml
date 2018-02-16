@@ -394,5 +394,9 @@ Contact:%s"</string>
     <string name="tab_text_3">Tab 3</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
+    <string name="connection_data_source">Connect Data Source</string>
+    <string name="share_wd_friends">Share with Friends</string>
+    <string name="leave_feedback">Leave Feedback</string>
+    <string name="help_support">Help &amp; Support</string>
 
 </resources>
