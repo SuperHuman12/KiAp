@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/mainGreen"
+    tools:context="com.developer.android.quickveggis.ui.activity.receiveKiks">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="7dp"
+        android:background="@drawable/kiks_bg_round"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="5dp"
+            android:textSize="18dp"
+            android:text="Scan this QR to Receive Kik Tokens"/>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dip"
+            android:background="#E3E3E3"/>
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="165dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/qrcode"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:layout_marginBottom="5dp"
+            android:textSize="18dp"
+            android:text="JADK78ADLKBSKJDAY9DAUV9AJL"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="60dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="10dp"
+            android:id="@+id/share_lay"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:gravity="center_vertical|center_horizontal"
+            android:background="@drawable/kiks_action_btns"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:paddingLeft="0dp"
+                android:layout_marginRight="2dp"
+                android:src="@drawable/share_ic"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:layout_marginLeft="2dp"
+                android:textSize="20dp"
+                android:text="Share"/>
+
+        </LinearLayout>
+
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dip"
+            android:background="#E3E3E3"/>
+
+        <Button
+            android:id="@+id/btnreq"
+            style="@style/BtnGreen"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/request_btn"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:textColor="#807F80"
+            android:textSize="18dp"
+            android:text="Request an Amount"/>
+
+        <Button
+            android:id="@+id/btnsend"
+            style="@style/BtnGreen"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:textSize="18dp"
+            android:text="Deposit Money"/>
+
+    </LinearLayout>
+
+</LinearLayout>

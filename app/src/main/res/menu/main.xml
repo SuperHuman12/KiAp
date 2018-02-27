@@ -35,4 +35,11 @@
         android:title="@string/action_history"
         app:showAsAction="always|collapseActionView" />
 
+    <item
+        android:id="@+id/info"
+        android:title="@string/action_history"
+        android:icon="@drawable/ic_icon_info"
+        android:visible="false"
+        app:showAsAction="ifRoom"/>
+
 </menu>

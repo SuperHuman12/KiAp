@@ -213,8 +213,21 @@
             android:name=".ui.activity.HistoryActivity"
             android:label="@string/title_activity_history"
             android:theme="@style/Theme.Hotline.SelectedTheme" />
-        <activity android:name=".ui.activity.select_sources"
+        <activity
+            android:name=".ui.activity.select_sources"
+            android:theme="@style/Theme.Hotline.SelectedTheme" />
+        <activity
+            android:name=".ui.activity.sendingKiks"
+            android:theme="@style/Theme.Hotline.SelectedTheme"
+            android:windowSoftInputMode="adjustResize|stateHidden">
+        </activity>
+        <activity
+            android:name=".ui.activity.receiveKiks"
+            android:theme="@style/Theme.Hotline.SelectedTheme">
+        </activity>
+        <activity android:name=".ui.activity.kiksSuccess"
             android:theme="@style/Theme.Hotline.SelectedTheme">
         </activity>
     </application>
+
 </manifest>

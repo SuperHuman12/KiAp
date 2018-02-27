@@ -1,6 +1,7 @@
 package com.developer.android.quickveggis.ui.fragments;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +22,8 @@ import com.developer.android.quickveggis.controller.CustomerController;
 import com.developer.android.quickveggis.model.GiftCard;
 import com.developer.android.quickveggis.ui.activity.MainActivity;
 import com.developer.android.quickveggis.ui.activity.PayoutActivity;
+import com.developer.android.quickveggis.ui.activity.receiveKiks;
+import com.developer.android.quickveggis.ui.activity.sendingKiks;
 import com.developer.android.quickveggis.ui.adapter.CardAdapter;
 import com.developer.android.quickveggis.ui.adapter.ZoomOutPageTransformer;
 import com.developer.android.quickveggis.ui.utils.FragmentUtils;
@@ -33,9 +37,8 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 import static com.developer.android.quickveggis.ui.activity.MainActivity.MENU_HISTORY_VISIBLE;
-import static com.developer.android.quickveggis.ui.activity.MainActivity.MENU_LOGO_GONE;
 
-public class WalletFragment extends Fragment implements MainActivity.MenuController, CardAdapter.Listener{
+public class WalletFragment extends Fragment implements MainActivity.MenuController, CardAdapter.Listener,OnClickListener{
     CardAdapter adapter;
     @Bind(R.id.btnPayout)
     View btnPayout;
@@ -54,6 +57,13 @@ public class WalletFragment extends Fragment implements MainActivity.MenuControl
 
     @Bind(R.id.btnSubmit)
     Button btnSubmit;
+
+    @Bind(R.id.send_kiks_lay)
+    LinearLayout send_kiks_lay;
+
+    @Bind(R.id.receive_kiks_lay)
+     LinearLayout receive_kiks_lay;
+
 
     List<GiftCard> cards = new ArrayList<>();
 
@@ -87,6 +97,9 @@ public class WalletFragment extends Fragment implements MainActivity.MenuControl
         } else {
             btnPayout.setEnabled(false);
         }
+
+        send_kiks_lay.setOnClickListener(this);
+        receive_kiks_lay.setOnClickListener(this);
 
         return view;
     }
@@ -221,5 +234,19 @@ public class WalletFragment extends Fragment implements MainActivity.MenuControl
     @Override
     public void onCardSelected(GiftCard card) {
         FragmentUtils.changeFragment(getActivity(), R.id.content, GiftCardConfirmFragment.newInstance(card), true);
+    }
+
+    @Override
+    public void onClick(View view) {
+
+        if(view.getId() == send_kiks_lay.getId()){
+            //Toast.makeText(getContext(), "send", Toast.LENGTH_SHORT).show();
+            Intent i = new Intent(getContext(), sendingKiks.class);
+            startActivity(i);
+        }else if(view.getId() == receive_kiks_lay.getId()){
+            Intent i = new Intent(getContext(), receiveKiks.class);
+            startActivity(i);
+
+        }
     }
 }
