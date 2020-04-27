@@ -27,6 +27,6 @@ A report to pinpoint oportunities that exist to partner with other brands or cat
 
 10. Basket Affinity Report
 
-<img src="https://github.com/SuperHuman12/KickBack-App/blob/master/Screenshot%202020-04-28%20at%202.50.46%20AM.png?raw=true" alt="alt text" width="360" height="640">
+<img src="https://github.com/SuperHuman12/KickBack-App/blob/master/Screenshot%202020-04-28%20at%202.50.46%20AM.png?raw=true" alt="alt text">
 
 <img src="https://github.com/Happyandhappy/Veggis-Android/blob/master/app/src/main/assets/Screenshot_1508771489.png" alt="alt text" width="360" height="640">
